@@ -11,15 +11,18 @@ DB_CONFIG = {
     'name' : os.getenv("DB_NAME")
 }
 
+def dev_cancel(user_input):
+    bypass_word = ["dev"]
+    return 
 def check_answer(user_input, correct_meaning):
     """convert user_input and correct_meaning into lower case"""
     if not user_input:
         return False
 
     user_input_after = user_input.lower().split()
-    correct_meaning_after = correct_meaning.lower().split()
+    correct_meaning_after = correct_meaning.lower()
 
-    return any()(word in correct_meaning_after for word in user_input_after)
+    return any(word in correct_meaning_after for word in user_input_after)
 
 def run_gate(target_score = 3):
     """lock hp"""
@@ -37,7 +40,7 @@ def run_gate(target_score = 3):
     print("=" * 50)
 
     while score < target_score:
-        cursor.execute(SELECT * FROM VOCAB WHERE ID_HSK = 1 ORDER BY RAND() LIMIT 1)
+        cursor.execute("SELECT * FROM VOCAB WHERE ID_HSK = 1 ORDER BY RAND() LIMIT 1")
         item = cursor.fetchone() #untuk ambil 1 row data di db
 
         if not item:
@@ -49,7 +52,11 @@ def run_gate(target_score = 3):
 
         user_answer = input("Jawaban (arti) : ").strip()
 
-        if(check_answer, item['Meaning']):
+        if dev_cancel(user_input):
+            print(f"[DEV CANCEL] | AUTO STOP PROGRAM")
+            score += 3
+
+        if check_answer(user_answer, item['Meaning']):
             print("Correct")
             score += 1
         else:
