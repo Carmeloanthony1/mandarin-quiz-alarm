@@ -67,5 +67,5 @@ def run_gate(target_score = 3):
     print("Selamat beraktivitas!")
     return True
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     run_gate(target_score = 3)
