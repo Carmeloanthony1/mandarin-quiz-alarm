@@ -123,15 +123,14 @@ def jalankan_alarm(target_alarm):
             notification_discord(judul_notif, pesan) 
             playsound()
 
-            unlocked = quiz_lock.run_gate(target_score=3)
-
-
-            if unlocked:
-                stopsound()
-                print("[STATUS] : Alarm berhasil dimatikan, selamat beraktivitas!")
-                break
-
-        time.sleep(2)
+            unlocked = False
+            while not unlocked:
+                unlocked = quiz_lock.run_gate(target_score=3)
+                if not unlocked:
+                    print("[STATUS] : Alarm berhasil dimatikan, selamat beraktivitas!")
+                    time.sleep(3)
+                
+            stopsound()
 
 if __name__ == "__main__":
     target = input_waktu()
