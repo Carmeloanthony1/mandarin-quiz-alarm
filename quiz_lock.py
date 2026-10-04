@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 DB_CONFIG = {
     'host' : os.getenv('DB_HOST'),
-    'port' : int(os.getenv('DB_PORT')),
+    'port' : os.getenv('DB_PORT'),
     'user' : os.getenv('DB_USER'),
     'name' : os.getenv("DB_NAME")
 }
