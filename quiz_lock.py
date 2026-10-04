@@ -4,6 +4,9 @@ import os
 import sys
 from dotenv import load_dotenv
 
+base_dir = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(base_dir, '.env'))
+
 DB_CONFIG = {
     'host' : os.getenv('DB_HOST'),
     'port' : os.getenv('DB_PORT'),
