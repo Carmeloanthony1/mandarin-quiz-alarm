@@ -3,6 +3,7 @@ import os
 import subprocess
 import time
 from dotenv import load_dotenv
+import quiz_lock
 import requests
 
 load_dotenv()
@@ -119,18 +120,15 @@ def jalankan_alarm(target_alarm):
             format_waktu = target_alarm.strftime("%H:%M")
             judul_notif = f"WAKTUNYA BANGUN! {format_waktu}"
             pesan = "Selesaikan 3 pertanyaan ini untuk membuka HP"
-            notification_discord(judul_notif, pesan)
-
+            notification_discord(judul_notif, pesan) 
             playsound()
 
-            try:
-                while True:
-                    time.sleep(1)
-            except KeyboardInterrupt:
+            unlocked = quiz_lock.run_gate(target_score=3)
+
+
+            if unlocked:
                 stopsound()
-                print(
-                    "[STATUS] : Alarm berhasil di matikan, selamat beraktivitas"
-                )
+                print("[STATUS] : Alarm berhasil dimatikan, selamat beraktivitas!")
                 break
 
         time.sleep(2)
