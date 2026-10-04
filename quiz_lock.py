@@ -11,6 +11,16 @@ DB_CONFIG = {
     'name' : os.getenv("DB_NAME")
 }
 
+def check_answer(user_input, correct_meaning):
+    """convert user_input and correct_meaning into lower case"""
+    if not user_input:
+        return False
+
+    user_input_after = user_input.lower().split()
+    correct_meaning_after = correct_meaning.lower().split()
+
+    return any()(word in correct_meaning_after for word in user_input_after)
+
 def run_gate(target_score = 3):
     """lock hp"""
     try:
@@ -39,4 +49,16 @@ def run_gate(target_score = 3):
 
         user_answer = input("Jawaban (arti) : ").strip()
 
+        if(check_answer, item['Meaning']):
+            print("Correct")
+            score += 1
+        else:
+            print(f"Salah!, {item['Hanzi']} | {item['Pinyin']} memiliki arti {item['Meaning']}")
     
+    db.close()
+    print("\n" + "=" * 50)
+    print("Selamat beraktivitas!")
+    return True
+
+if __name__ = "__main__":
+    run_gate(target_score = 3)
